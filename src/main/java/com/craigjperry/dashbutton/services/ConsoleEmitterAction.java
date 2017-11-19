@@ -4,8 +4,6 @@ import com.craigjperry.dashbutton.Action;
 import com.craigjperry.dashbutton.DashButton;
 import com.craigjperry.dashbutton.drivers.ConsoleWriter;
 
-import java.util.function.Consumer;
-
 public class ConsoleEmitterAction implements Action {
     private final ConsoleWriter consoleWriter;
     private final String message;
