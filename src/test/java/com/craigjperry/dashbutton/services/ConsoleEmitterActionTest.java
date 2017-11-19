@@ -2,20 +2,16 @@ package com.craigjperry.dashbutton.services;
 
 import com.craigjperry.dashbutton.DashButton;
 import com.craigjperry.dashbutton.drivers.ConsoleWriter;
-import org.junit.Before;
+import com.craigjperry.dashbutton.interfaces.ConsoleEmitterAction;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import java.util.function.Consumer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ConsoleEmitterActionTest {

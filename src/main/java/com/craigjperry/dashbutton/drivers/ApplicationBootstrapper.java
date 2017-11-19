@@ -1,7 +1,7 @@
 package com.craigjperry.dashbutton.drivers;
 
 import com.craigjperry.dashbutton.DashButton;
-import com.craigjperry.dashbutton.services.ConsoleEmitterAction;
+import com.craigjperry.dashbutton.interfaces.ConsoleEmitterAction;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;

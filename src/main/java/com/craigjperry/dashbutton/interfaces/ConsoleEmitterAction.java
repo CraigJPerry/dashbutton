@@ -1,4 +1,4 @@
-package com.craigjperry.dashbutton.services;
+package com.craigjperry.dashbutton.interfaces;
 
 import com.craigjperry.dashbutton.Action;
 import com.craigjperry.dashbutton.DashButton;
