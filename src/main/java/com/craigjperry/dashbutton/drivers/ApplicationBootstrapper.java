@@ -1,12 +1,12 @@
-package com.craigjperry.dashbutton;
+package com.craigjperry.dashbutton.drivers;
 
-import com.craigjperry.dashbutton.drivers.ConsoleWriter;
+import com.craigjperry.dashbutton.DashButton;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-@SpringBootApplication
-public class DashButtonApplication {
+@SpringBootApplication(scanBasePackages = "com.craigjperry.dashbutton")
+public class ApplicationBootstrapper {
 
 	@Bean
 	public DashButton dashButton1() {
@@ -24,6 +24,6 @@ public class DashButtonApplication {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(DashButtonApplication.class, args);
+		SpringApplication.run(ApplicationBootstrapper.class, args);
 	}
 }
