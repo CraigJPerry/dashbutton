@@ -1,6 +1,7 @@
 package com.craigjperry.dashbutton.interfaces;
 
 import com.craigjperry.dashbutton.DashButton;
+import com.craigjperry.dashbutton.DashButtonActionDispatcher;
 import com.craigjperry.dashbutton.drivers.ConsoleWriter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,25 +10,24 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.boot.DefaultApplicationArguments;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CommandLineInterfaceTest {
     @Mock
     ConsoleWriter consoleWriter;
 
+    @Mock
+    DashButtonActionDispatcher dashButtonActionDispatcher;
+
     @Test
     public void printsWelcomeTextOnStartup() throws Exception {
         // Given
         List<DashButton> dashButtons = randomNumberOfDashButtons();
-        CommandLineInterface cli = new CommandLineInterface(consoleWriter, dashButtons, "testVersion");
+        CommandLineInterface cli = new CommandLineInterface(consoleWriter, dashButtons, "testVersion", dashButtonActionDispatcher);
 
         // When
         cli.run(new DefaultApplicationArguments(new String[]{}));
@@ -35,6 +35,7 @@ public class CommandLineInterfaceTest {
         // Then
         verify(consoleWriter).println("DashButton vtestVersion");
         verify(consoleWriter).println("> Listening for " + dashButtons.size() + " Dash Buttons");
+        verify(dashButtonActionDispatcher).dispatchEvents();
     }
 
     private List<DashButton> randomNumberOfDashButtons() {
