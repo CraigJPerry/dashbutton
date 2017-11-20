@@ -1,5 +1,7 @@
 package com.craigjperry.dashbutton;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -8,6 +10,8 @@ import java.util.stream.Collectors;
 
 @Component
 public class DashButtonActionDispatcher {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DashButtonActionDispatcher.class);
+
     private final Map<String, DashButton> dashButtonsByMacAddress;
     private final List<Action> actions;
     private final Listener listener;
@@ -21,7 +25,10 @@ public class DashButtonActionDispatcher {
     public void dispatchEvents() {
         String macAddress = listener.listenForNextButtonEvent();
         if (dashButtonsByMacAddress.containsKey(macAddress)) {
+            LOGGER.info("Performing actions for dash button [{}]", macAddress);
             notifyActions(dashButtonsByMacAddress.get(macAddress));
+        } else {
+            LOGGER.info("Unknown dash button [{}] woke up", macAddress);
         }
     }
 
