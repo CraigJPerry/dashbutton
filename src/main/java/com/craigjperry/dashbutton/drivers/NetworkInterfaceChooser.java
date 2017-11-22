@@ -9,8 +9,8 @@ import java.net.Inet4Address;
 import java.net.UnknownHostException;
 
 @Component
-public class NetworkInterfaceChooser {
-    public PcapNetworkInterface firstLocalInterface() {
+class NetworkInterfaceChooser {
+    PcapNetworkInterface firstLocalInterface() {
         try {
             return Pcaps.getDevByAddress(Inet4Address.getLocalHost());
         } catch (PcapNativeException|UnknownHostException e) {
