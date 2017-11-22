@@ -13,6 +13,7 @@ import java.util.concurrent.BlockingQueue;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
@@ -31,14 +32,14 @@ public class DashButtonActionDispatcherTest {
     public void setUp() throws Exception {
         String macAddress = "00:00:00:00:00:01";
         dashButton = new DashButton(macAddress);
-        eventsQueue = new ArrayBlockingQueue<WhoHasArpPacketEvent>(1);
+        eventsQueue = new ArrayBlockingQueue<>(1);
         eventsQueue.put(new WhoHasArpPacketEvent(LocalDateTime.now(), macAddress));
     }
 
     @Test
     public void dispatchesKnownButtonEvents() throws Exception {
         // Given
-        DashButtonActionDispatcher dispatcher = new DashButtonActionDispatcher(asList(dashButton), asList(action), eventsQueue);
+        DashButtonActionDispatcher dispatcher = new DashButtonActionDispatcher(singletonList(dashButton), singletonList(action), eventsQueue);
 
         // When
         dispatcher.consumeNextEvent();
@@ -49,7 +50,7 @@ public class DashButtonActionDispatcherTest {
 
     @Test
     public void ignoresUnknownButtonEvents() throws Exception {
-        DashButtonActionDispatcher dispatcher = new DashButtonActionDispatcher(emptyList(), asList(action), eventsQueue);
+        DashButtonActionDispatcher dispatcher = new DashButtonActionDispatcher(emptyList(), singletonList(action), eventsQueue);
 
         dispatcher.consumeNextEvent();
 
@@ -59,7 +60,7 @@ public class DashButtonActionDispatcherTest {
     @Test
     public void runsActionsInOrder() throws Exception {
         when(action.perform(dashButton)).thenReturn(true);
-        DashButtonActionDispatcher dispatcher = new DashButtonActionDispatcher(asList(dashButton), asList(action, action2), eventsQueue);
+        DashButtonActionDispatcher dispatcher = new DashButtonActionDispatcher(singletonList(dashButton), asList(action, action2), eventsQueue);
 
         dispatcher.consumeNextEvent();
 
@@ -71,7 +72,7 @@ public class DashButtonActionDispatcherTest {
     @Test
     public void doesNotProceedPastFalseAction() throws Exception {
         when(action.perform(dashButton)).thenReturn(false);
-        DashButtonActionDispatcher dispatcher = new DashButtonActionDispatcher(asList(dashButton), asList(action, action2), eventsQueue);
+        DashButtonActionDispatcher dispatcher = new DashButtonActionDispatcher(singletonList(dashButton), asList(action, action2), eventsQueue);
 
         dispatcher.consumeNextEvent();
 

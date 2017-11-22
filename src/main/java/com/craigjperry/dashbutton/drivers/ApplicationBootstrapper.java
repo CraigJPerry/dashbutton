@@ -29,7 +29,7 @@ public class ApplicationBootstrapper {
 
     @Bean
     public BlockingQueue<WhoHasArpPacketEvent> eventsQueue() {
-        return new ArrayBlockingQueue<WhoHasArpPacketEvent>(10);
+        return new ArrayBlockingQueue<>(10);
     }
 
     @Bean

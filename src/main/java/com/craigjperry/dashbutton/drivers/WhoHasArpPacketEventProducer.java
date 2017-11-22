@@ -3,7 +3,6 @@ package com.craigjperry.dashbutton.drivers;
 import com.craigjperry.dashbutton.NetworkListener;
 import com.craigjperry.dashbutton.WhoHasArpPacketEvent;
 import org.pcap4j.core.*;
-import org.pcap4j.packet.ArpPacket;
 import org.pcap4j.packet.EthernetPacket;
 import org.pcap4j.packet.Packet;
 import org.slf4j.Logger;

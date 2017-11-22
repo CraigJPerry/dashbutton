@@ -3,7 +3,6 @@ package com.craigjperry.dashbutton.interfaces;
 import com.craigjperry.dashbutton.DashButton;
 import com.craigjperry.dashbutton.DashButtonActionDispatcher;
 import com.craigjperry.dashbutton.NetworkListener;
-import com.craigjperry.dashbutton.drivers.ConsoleWriter;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -15,9 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CommandLineInterfaceTest {
