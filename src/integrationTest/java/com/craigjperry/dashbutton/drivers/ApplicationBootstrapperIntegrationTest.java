@@ -7,9 +7,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ApplicationBootstrapperTests {
+public class ApplicationBootstrapperIntegrationTest {
 
-	@Test
+    @Test
 	public void contextLoads() {
 	}
 

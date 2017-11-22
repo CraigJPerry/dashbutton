@@ -1,35 +1,27 @@
 package com.craigjperry.dashbutton.drivers;
 
 import com.craigjperry.dashbutton.DashButton;
-import com.craigjperry.dashbutton.interfaces.ConsoleEmitterAction;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @SpringBootApplication(scanBasePackages = "com.craigjperry.dashbutton")
 public class ApplicationBootstrapper {
 
-    @Bean
-    public DashButton dashButton1() {
-        return new DashButton("00:12:34:56:78:00");
-    }
+    @Value("${dash.button.mac.address}")
+    private List<String> macAddresses;
 
     @Bean
-    public DashButton dashButton2() {
-        return new DashButton("00:00:12:34:56:78");
-    }
-
-    @Bean
-    public ConsoleWriter consoleWriter() {
-        return new ConsoleWriter(System.out::println);
-    }
-
-    @Bean
-    public ConsoleEmitterAction consoleEmitterAction() {
-        return new ConsoleEmitterAction(consoleWriter(), "Button was pressed!");
+    public List<DashButton> dashButtons() {
+        return macAddresses.stream().map(DashButton::new).collect(Collectors.toList());
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(ApplicationBootstrapper.class, args);
+        SpringApplication.run(ApplicationBootstrapper.class, args).close();
+        // @see CommandLineInterface for application entry point
     }
 }
